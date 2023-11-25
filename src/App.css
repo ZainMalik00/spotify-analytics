@@ -1,0 +1,12 @@
+.App {
+  display: block;
+  margin-left: 10px;
+}
+
+li{
+  list-style-type: decimal;
+}
+
+label{
+  font-weight: bold;
+}
