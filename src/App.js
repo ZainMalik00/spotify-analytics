@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 const CLIENT_ID = "1b82855ba97c408590be267aa16378b2";
 const SPOTIFY_AUTH = "https://accounts.spotify.com/authorize?";
-const REDIRECT_URI = "https://github.com/ZainMalik00/spotify-analytics/";
+const REDIRECT_URI = "https://zainmalik00.github.io/spotify-analytics/";
 const SPACE_DELIMITER = "%20";
 const SCOPES = ["user-top-read", "user-read-recently-played"];
 const SCOPES_URL = SCOPES.join(SPACE_DELIMITER);
