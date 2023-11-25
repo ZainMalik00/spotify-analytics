@@ -20,6 +20,7 @@ function App() {
   const [userMostRecentTracks, setUserMostRecentTracks] = useState([]);
 
   useEffect(() => {
+    document.title = 'Spotify Analytics';
     if(window.location.hash) {
       const spotifyAccessParams = getParamsAfterLoginRedirect(window.location.hash);
       if(spotifyAccessParams.access_token.length != 0){
