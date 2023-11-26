@@ -6,9 +6,9 @@ function TopArtistList(props) {
     const [userTopArtists, setUserTopArtists] = useState([]);
     
     useEffect(() => {
-      let topArtists = SpotifyAPIService.getUserTopArtists(props.timeRange);
+      const topArtists = SpotifyAPIService.getUserTopArtists(props.timeRange);
       setTimeout(() => {setUserTopArtists(userTopArtists => userTopArtists.concat(topArtists))}
-        , 100);
+        , 500);
     }, []);
 
     const generateListUserTopArtists = () => {

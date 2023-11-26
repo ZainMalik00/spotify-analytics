@@ -6,9 +6,9 @@ function MostRecentlyPlayed() {
   const [userMostRecentTracks, setUserMostRecentTracks] = useState([]);
   
   useEffect(() => {
-    let mostRecentlyPlayed = SpotifyAPIService.getUserMostRecentTracks();
+    const mostRecentlyPlayed = SpotifyAPIService.getUserMostRecentTracks();
     setTimeout(() => {setUserMostRecentTracks(userMostRecentTracks => userMostRecentTracks.concat(mostRecentlyPlayed))}
-      , 100);
+      , 1000);
   }, []);
 
   const generateListUserMostRecentTracks = () => {
@@ -21,8 +21,14 @@ function MostRecentlyPlayed() {
     );
   }
 
-  return (
+  if(userMostRecentTracks.length !== 0){
+    return (
       <ul>{generateListUserMostRecentTracks()}</ul>
+    );
+  }
+
+  return (
+    <p>Loading...</p>
   );
 
 }
