@@ -6,7 +6,9 @@ function TopTrackList(props) {
     const [userTopTracks, setUserTopTracks] = useState([]);
     
     useEffect(() => {
-      setUserTopTracks(SpotifyAPIService.getUserTopTracks(props.timeRange));
+      let topTracks = SpotifyAPIService.getUserTopTracks(props.timeRange);
+      setTimeout(() => {setUserTopTracks(userTopTracks => userTopTracks.concat(topTracks))}
+        , 100);
     }, []);
 
     const generateListUserTopTracks = () => {
