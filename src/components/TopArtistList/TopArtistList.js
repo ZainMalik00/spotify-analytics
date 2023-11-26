@@ -13,11 +13,11 @@ function TopArtistList(props) {
 
     const generateListUserTopArtists = () => {
       return(
-          userTopArtists.map((artist) =>
-              <li key={artist.id}>
-                  {artist.name}
-              </li> 
-          )
+        userTopArtists.map((artist) =>
+            <li key={artist.id}>
+                {artist.name}
+            </li> 
+        )
       );
     }
 
