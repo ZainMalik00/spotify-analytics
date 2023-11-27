@@ -1,7 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import LoginService from './backend/services/login-service';
-
 import { UserTopArtistsProvider } from './backend/data/UserTopArtistsContext';
 import { UserTopTracksProvider } from './backend/data/UserTopTracksContext';
 import { MostRecentlyPlayedProvider } from './backend/data/MostRecentlyPlayedContext'
