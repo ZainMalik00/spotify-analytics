@@ -1,9 +1,10 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import TopArtistList from './components/TopArtistList/TopArtistList';
-import TopTrackList from './components/TopTracksList/TopTrackList';
-import MostRecentlyPlayed from './components/MostRecentlyPlayed/MostRecentlyPlayed';
 import LoginService from './backend/services/login-service';
+import { UserTopArtistsProvider } from './backend/data/UserTopArtistsContext';
+import { UserTopTracksProvider } from './backend/data/UserTopTracksContext';
+import { MostRecentlyPlayedProvider } from './backend/data/MostRecentlyPlayedContext'
+import UserTopItemsContainer from './components/UserTopItems/UserTopItemsContainer';
 
 function App() {
   const [spotifyAccessToken, setSpotifyAccessToken] = useState("");
@@ -31,22 +32,13 @@ function App() {
   return (
     <div className="App">
       <button onClick={loginRedirect}>Re-login To Spotify</button>
-      <div className="Body">
-        <label>Top Artists - Short Term (4 Weeks)</label>
-        <TopArtistList timeRange="SHORT" />
-        <label>Top Artists - Medium Term (6 Months)</label>
-        <TopArtistList timeRange="MEDIUM" />
-        <label>Top Artists - Long Term (All Time)</label>
-        <TopArtistList timeRange="LONG" />
-        <label>Top Tracks - Short Term (4 Weeks)</label>
-        <TopTrackList timeRange="SHORT" />
-        <label>Top Tracks - Medium Term (6 Months)</label>
-        <TopTrackList timeRange="MEDIUM" />
-        <label>Top Tracks - Long Term (All Time)</label>
-        <TopTrackList timeRange="LONG" />
-        <label>Most Recently Played</label>
-        <MostRecentlyPlayed />
-      </div>
+      <UserTopArtistsProvider>
+        <UserTopTracksProvider>
+          <MostRecentlyPlayedProvider>
+            <UserTopItemsContainer />
+          </MostRecentlyPlayedProvider>
+        </UserTopTracksProvider>
+      </UserTopArtistsProvider>
     </div>
   );
 }

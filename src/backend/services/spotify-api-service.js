@@ -45,9 +45,9 @@ const generateArtistListString = (artists) => {
 };
 
 const SpotifyAPIService = {
-    getUserTopArtists: function(timeRange){
+    getUserTopArtists: async function(timeRange){
         let userTopArtists = [];
-        fetch(getArtistEndpoint(timeRange), spotifyGETRequest)
+        await fetch(getArtistEndpoint(timeRange), spotifyGETRequest)
             .then(response => response.json())
             .then((responseJSON) => { 
                 responseJSON.items.forEach(artistItem => {
@@ -57,9 +57,9 @@ const SpotifyAPIService = {
         return userTopArtists;
     },
 
-    getUserTopTracks: function(timeRange){
+    getUserTopTracks: async function(timeRange){
         let userTopTracks = [];
-        fetch(getTrackEndpoint(timeRange), spotifyGETRequest)
+        await fetch(getTrackEndpoint(timeRange), spotifyGETRequest)
             .then(response => response.json())
             .then((responseJSON) => { 
                 responseJSON.items.forEach(trackItem => {
@@ -70,17 +70,17 @@ const SpotifyAPIService = {
         return userTopTracks;
     },
 
-    getUserMostRecentTracks: function(){
-        let userMostRecentTracks = [];
-        fetch(mostRecentlyPlayedEndpoint, spotifyGETRequest)
+    getUserMostRecentPlayed: async function(){
+        let userMostRecentlyPlayed = [];
+        await fetch(mostRecentlyPlayedEndpoint, spotifyGETRequest)
             .then(response => response.json())
             .then((responseJSON) => { 
-                responseJSON.items.forEach((trackItem, index) => {
+                responseJSON.items.forEach((trackItem) => {
                     const artistsListString = generateArtistListString(trackItem.track.artists);
-                    userMostRecentTracks.push({"id": trackItem.track.id.concat(index), "name": trackItem.track.name, "artist": artistsListString});  
+                    userMostRecentlyPlayed.push({"id": trackItem.track.id, "name": trackItem.track.name, "artist": artistsListString});  
                 })
             });
-        return userMostRecentTracks;
+        return userMostRecentlyPlayed;
     }
 };
 
