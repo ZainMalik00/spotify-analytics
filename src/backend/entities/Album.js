@@ -1,9 +1,12 @@
-export const Artist = (
+export const Album = (
     id = "",
     name = "",
+    releaseDate = "",
+    type= "",
+    numOfTracks = 0,
     images = [],
     genres = [],
-    followers = 0,
+    artists = [],
     popularity = 0,
     uri = "",
     url = ""    
@@ -11,9 +14,12 @@ export const Artist = (
     return{
         id: id,
         name: name,
+        releaseDate: releaseDate,
+        type: type,
+        numOfTracks: numOfTracks,
         images: images,
         genres: genres,
-        followers: followers,
+        artists: artists,
         popularity: popularity,
         uri: uri,
         url: url

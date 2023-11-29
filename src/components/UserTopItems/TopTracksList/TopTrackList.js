@@ -7,7 +7,7 @@ function TopTrackList(props) {
       return(
         props.userTopTracks.map((track) => 
           <li key={track.id}>
-            {track.name} - {track.artist}
+            {track.name} - {track.artists}
           </li> 
         )
       );

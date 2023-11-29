@@ -3,20 +3,25 @@ export const Track = (
     name = "",
     duration = "",
     artists = [],
-    image = {},
+    images = [],
     album = {},
     popularity = 0,
+    explicit = false,
     previewURL = "",
+    uri = "",
+    url = ""    
 ) => {
     return{
         id: id,
         name: name,
         duration: duration,
         artists: artists,
-        image: image,
+        images: images,
         album: album,
-        followers: followers,
         popularity: popularity,
-        previewURL: previewURL
+        explicit: explicit,
+        previewURL: previewURL,
+        uri: uri,
+        url: url
     };
 };
