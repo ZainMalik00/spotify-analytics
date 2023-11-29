@@ -10,7 +10,7 @@ function MostRecentlyPlayedList() {
     return (
       userMostRecentlyPlayed.map((track, index) =>
         <li key={track.id.concat(index)}>
-          {track.name} - {track.artist}
+          {track.name} - {track.artists}
         </li>
       )
     );
