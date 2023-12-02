@@ -1,0 +1,7 @@
+thead tr :last-child {
+    text-align: right;
+}
+
+tr :last-child {
+    text-align: right;
+}

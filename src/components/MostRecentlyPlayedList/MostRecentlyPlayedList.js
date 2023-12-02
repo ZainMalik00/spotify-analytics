@@ -1,24 +1,16 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import './MostRecentlyPlayedList.css';
 import MostRecentlyPlayedContext from '../../backend/data/MostRecentlyPlayedContext';
-
+import TableTrackList from '../common/TableTrackList/TableTrackList';
 
 function MostRecentlyPlayedList() {
   const {userMostRecentlyPlayed} = useContext(MostRecentlyPlayedContext);
 
-  const generateListUserMostRecentTracks = () => {
-    return (
-      userMostRecentlyPlayed.map((track, index) =>
-        <li key={track.id.concat(index)}>
-          {track.name} - {track.artists}
-        </li>
-      )
-    );
-  }
-
   if(userMostRecentlyPlayed.length !== 0){
     return (
-      <ul>{generateListUserMostRecentTracks()}</ul>
+      <div>
+        <TableTrackList trackList= {userMostRecentlyPlayed} />        
+      </div>
     );
   }
 

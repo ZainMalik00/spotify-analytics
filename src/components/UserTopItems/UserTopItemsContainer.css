@@ -1,0 +1,33 @@
+.UserTopItemsContainer{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.TrackListContainer{
+    display: flex;
+    justify-content: center;
+}
+
+#TracksHeader {
+   display: flex;
+   align-items: center; 
+   margin-bottom: 10px;
+}
+
+#TracksLabel {
+    margin-right: 10px;
+}
+
+.TrackList {
+    width: 80vw;
+}
+
+#MostRecentlyPlayedHeader{
+    display: flex;
+}
+
+#MostRecentlyPlayedLabel{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

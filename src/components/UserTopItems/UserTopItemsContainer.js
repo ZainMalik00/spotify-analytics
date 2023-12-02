@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import './UserTopItemsContainer.css';
 import TopArtistList from './TopArtistList/TopArtistList';
 import TopTrackList from './TopTracksList/TopTrackList';
@@ -7,6 +7,8 @@ import UserTopArtistsContext from '../../backend/data/UserTopArtistsContext';
 import UserTopTracksContext from '../../backend/data/UserTopTracksContext';
 import MostRecentlyPlayedList from '../MostRecentlyPlayedList/MostRecentlyPlayedList';
 import MostRecentlyPlayedContext from '../../backend/data/MostRecentlyPlayedContext';
+import { Option, Select } from '@mui/joy';
+import TableTrackList from '../common/TableTrackList/TableTrackList';
 
 function UserTopItemsContainer() {
 
@@ -29,6 +31,8 @@ function UserTopItemsContainer() {
     } = useContext(UserTopTracksContext);
 
     const { updateMostRecentlyPlayed } = useContext (MostRecentlyPlayedContext);
+    
+    const [currentUserTopTracks, setCurrentUserTopTracks] = useState([]);
 
     useEffect(() => {
         ( async () => {
@@ -36,7 +40,9 @@ function UserTopItemsContainer() {
             updateUserTopArtistsMediumTerm(await SpotifyAPIService.getUserTopArtists("MEDIUM"));
             updateUserTopArtistsLongTerm(await SpotifyAPIService.getUserTopArtists("LONG"));
 
-            updateUserTopTracksShortTerm(await SpotifyAPIService.getUserTopTracks("SHORT"));
+            const tracksShortTerm = await SpotifyAPIService.getUserTopTracks("SHORT");
+            setCurrentUserTopTracks(tracksShortTerm);
+            updateUserTopTracksShortTerm(tracksShortTerm);
             updateUserTopTracksMediumTerm(await SpotifyAPIService.getUserTopTracks("MEDIUM"));
             updateUserTopTracksLongTerm(await SpotifyAPIService.getUserTopTracks("LONG"));
 
@@ -45,22 +51,53 @@ function UserTopItemsContainer() {
 
     }, []);
 
+
+    const handleSelectTracksOnChange = (event, newValue) => {
+        switch(newValue){
+            case "SHORT":
+                setCurrentUserTopTracks(userTopTracksShortTerm);
+                break;
+            case "MEDIUM":
+                setCurrentUserTopTracks(userTopTracksMediumTerm);
+                break;
+            case "LONG":
+                setCurrentUserTopTracks(userTopTracksLongTerm);
+                break;
+            default: 
+                setCurrentUserTopTracks(userTopTracksShortTerm);;  
+        }
+    };
+
     return (
-        <div>
+        <div className='UserTopItemsContainer'>
             <label>Top Artists - Short Term (4 Weeks)</label>
             <TopArtistList userTopArtists={userTopArtistsShortTerm} />
             <label>Top Artists - Medium Term (6 Months)</label>
             <TopArtistList userTopArtists={userTopArtistsMediumTerm} />
             <label>Top Artists - Long Term (All Time)</label>
             <TopArtistList userTopArtists={userTopArtistsLongTerm} />
-            <label>Top Tracks - Short Term (4 Weeks)</label>
-            <TopTrackList userTopTracks={userTopTracksShortTerm} />
-            <label>Top Tracks - Medium Term (6 Months)</label>
-            <TopTrackList userTopTracks={userTopTracksMediumTerm} />
-            <label>Top Tracks - Long Term (All Time)</label>
-            <TopTrackList userTopTracks={userTopTracksLongTerm} />
-            <label>Most Recently Played</label>
-            <MostRecentlyPlayedList />
+            <div id='TracksHeader'>
+                <label id='TracksLabel'>Top Tracks</label>
+                <Select defaultValue="SHORT" onChange={handleSelectTracksOnChange}>
+                    <Option value="SHORT">4 Weeks</Option>
+                    <Option value="MEDIUM">6 Months</Option>
+                    <Option value="LONG">All Time</Option>
+                </Select>
+            </div>
+            <div className="TrackListContainer">
+                <div className="TrackList">
+                    <TableTrackList trackList={currentUserTopTracks}/>
+                </div>
+            </div>
+            <div id="MostRecentlyPlayedHeader">
+                <label id="MostRecentlyPlayedLabel">Most Recently Played</label>
+            </div>
+            <div className="TrackListContainer">
+                <div className="TrackList">
+                    <MostRecentlyPlayedList />
+                </div>
+            </div>
+            
         </div>
     );
 }
