@@ -4,6 +4,26 @@
     
 }
 
+.ArtistListContainer{
+    display: flex;
+    justify-content: center;
+}
+
+#ArtistHeader {
+   display: flex;
+   align-items: center;
+   margin-top: 10px; 
+   margin-bottom: 10px;
+}
+
+#ArtistsLabel {
+    margin-right: 10px;
+}
+
+.ArtistList {
+    width: 80vw;
+}
+
 .TrackListContainer{
     display: flex;
     justify-content: center;
@@ -12,6 +32,7 @@
 #TracksHeader {
    display: flex;
    align-items: center; 
+   margin-top: 10px; 
    margin-bottom: 10px;
 }
 

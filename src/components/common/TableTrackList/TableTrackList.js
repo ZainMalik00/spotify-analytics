@@ -5,7 +5,7 @@ function TableTrackList (props) {
 
     if(props.trackList.length !== 0){
         return(
-            <Table>
+            <Table hoverRow>
                 <thead>
                     <tr>
                         <th style={{ width: '1%' }}>#</th>
