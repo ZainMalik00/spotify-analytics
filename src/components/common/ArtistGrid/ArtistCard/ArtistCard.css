@@ -1,0 +1,12 @@
+.CardBody {
+    background-color: "white";
+    opacity:"75%" ;
+    padding-left: "5px"; 
+    padding-right: "5px";
+    padding-bottom: "10px";
+    text-transform: uppercase;
+}
+
+/* .CardBody:hover + .hiddenCardBody {
+    text-align: end;
+} */
