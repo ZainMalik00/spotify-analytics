@@ -12,16 +12,13 @@
 #ArtistHeader {
    display: flex;
    align-items: center;
+   justify-content: space-between;
    margin-top: 10px; 
-   margin-bottom: 10px;
+   margin-bottom: 10px; 
 }
 
 #ArtistsLabel {
     margin-right: 10px;
-}
-
-.ArtistList {
-    width: 80vw;
 }
 
 .TrackListContainer{
@@ -31,17 +28,14 @@
 
 #TracksHeader {
    display: flex;
-   align-items: center; 
+   align-items: center;
+   justify-content: space-between; 
    margin-top: 10px; 
    margin-bottom: 10px;
 }
 
 #TracksLabel {
     margin-right: 10px;
-}
-
-.TrackList {
-    width: 80vw;
 }
 
 #MostRecentlyPlayedHeader{

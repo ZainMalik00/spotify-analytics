@@ -32,14 +32,16 @@ function App() {
 
   return (
     <div className="App">
-      <Button onClick={loginRedirect}>Re-login To Spotify</Button>
-      <UserTopArtistsProvider>
-        <UserTopTracksProvider>
-          <MostRecentlyPlayedProvider>
-            <UserTopItemsContainer />
-          </MostRecentlyPlayedProvider>
-        </UserTopTracksProvider>
-      </UserTopArtistsProvider>
+      <div className='Content'>
+        <Button onClick={loginRedirect}>Re-login To Spotify</Button>
+        <UserTopArtistsProvider>
+          <UserTopTracksProvider>
+            <MostRecentlyPlayedProvider>
+              <UserTopItemsContainer />
+            </MostRecentlyPlayedProvider>
+          </UserTopTracksProvider>
+        </UserTopArtistsProvider>
+      </div>
     </div>
   );
 }

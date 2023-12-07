@@ -1,8 +1,13 @@
 .App {
-  display: block;
+  display: flex;
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 10px;
+  justify-content: center;
+}
+
+.Content {
+  width: 80vw;
 }
 
 li{

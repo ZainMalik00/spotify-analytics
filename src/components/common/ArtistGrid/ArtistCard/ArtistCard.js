@@ -1,7 +1,11 @@
+import { useState } from "react";
 import "./ArtistCard.css"
 import { AspectRatio, Card, CardContent, CardCover, CardOverflow, Typography } from '@mui/joy';
 
 function ArtistCard(props){
+
+    const [isHidden, setIsHidden] = useState(true);
+
     if(!!props.artistItem){
         return(
             <Card sx={{ width: 160, height: 160, paddingLeft: "0px", paddingRight: "0px", paddingBottom: "0px"}}>
@@ -15,9 +19,13 @@ function ArtistCard(props){
                     />
                 </CardCover>
                 <CardContent sx={{ justifyContent: 'flex-end'}}>
-                    <div style={{backgroundColor: "white", opacity:"75%", paddingLeft: "5px", paddingRight: "5px", paddingBottom: "10px"}}>
+                    <div 
+                        style={{backgroundColor: "white", opacity:"75%", paddingLeft: "5px", paddingRight: "5px", paddingBottom: "10px"}}
+                        onMouseEnter={() => setIsHidden(false)}
+                        onMouseLeave={() => setIsHidden(true)}
+                    >
                         <Typography level="title-md" sx={{textTransform: 'uppercase'}}>{props.index}{". "}{props.artistItem.name}</Typography>
-                        <Typography level="body-sm" sx={{textTransform: 'uppercase'}}>{props.artistItem.genres.join(", ")}</Typography>
+                        <Typography level="body-sm" sx={{textTransform: 'uppercase'}}>{isHidden? "" : props.artistItem.genres.join(", ")}</Typography>
                     </div>   
                 </CardContent>  
             </Card>

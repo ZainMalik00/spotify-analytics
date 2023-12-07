@@ -1,4 +1,4 @@
-import { Grid } from '@mui/joy';
+import { Box, Grid, Stack } from '@mui/joy';
 
 import './ArtistGrid.css';
 import ArtistCard from './ArtistCard/ArtistCard';
@@ -9,14 +9,31 @@ function ArtistGrid (props) {
         return(
             <Grid   
                 container
-                spacing={{ xs: 2, md: 2 }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
-                sx={{ flexGrow: 1 }}
+                align= "center"
+                justify = "center"
             >
                 {props.artistList.map((artist, index) => {
                     return(
-                        <Grid key={index}>
+                        <Grid 
+                            key={index}
+                            sx={{ 
+                                m: 2,
+                                flexGrow: 1 
+                            }}
+                        >
                             <ArtistCard index={index+1} artistItem={artist} />
+                        </Grid>
+                    );
+                })}
+
+                {props.artistList.map((_, index) => { //Fill Last Row With Dummy Elements
+                    return(
+                        <Grid 
+                            key={index+props.artistList.length}
+                            sx={{ flexGrow: 1 }}
+                        >
+                            <div style={{width: 160, height: 0}}></div>
                         </Grid>
                     );
                 })}
