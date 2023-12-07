@@ -35,7 +35,6 @@ function ArtistGrid (props) {
                                 mx: 2,
                                 flexGrow: 1 
                             }}
-                            sx={{ flexGrow: 1 }}
                         >
                             <div style={{width: 160, height: 0}}></div>
                         </Grid>
