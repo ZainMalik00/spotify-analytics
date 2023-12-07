@@ -17,7 +17,10 @@ function ArtistGrid (props) {
                     return(
                         <Grid 
                             key={index}
-                            sx={{ flexGrow: 1 }}
+                            sx={{ 
+                                m: 2,
+                                flexGrow: 1 
+                            }}
                         >
                             <ArtistCard index={index+1} artistItem={artist} />
                         </Grid>
@@ -28,10 +31,14 @@ function ArtistGrid (props) {
                     return(
                         <Grid 
                             key={index+props.artistList.length}
+<<<<<<< HEAD
                             sx={{ 
                                 mx: 2,
                                 flexGrow: 1 
                             }}
+=======
+                            sx={{ flexGrow: 1 }}
+>>>>>>> 28124840317f1024ed7cdf2287389186da90148d
                         >
                             <div style={{width: 160, height: 0}}></div>
                         </Grid>
