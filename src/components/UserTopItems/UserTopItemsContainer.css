@@ -1,0 +1,39 @@
+.UserTopItemsContainer{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.ArtistListContainer{
+    display: flex;
+    justify-content: center;
+}
+
+#ArtistHeader {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-top: 10px; 
+   margin-bottom: 10px; 
+}
+
+.TrackListContainer{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+}
+
+#TracksHeader {
+   display: flex;
+   align-items: center;
+   justify-content: space-between; 
+   margin-top: 10px; 
+   margin-bottom: 10px;
+}
+
+#MostRecentlyPlayedHeader{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

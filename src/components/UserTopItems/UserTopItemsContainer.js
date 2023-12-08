@@ -1,12 +1,13 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import './UserTopItemsContainer.css';
-import TopArtistList from './TopArtistList/TopArtistList';
-import TopTrackList from './TopTracksList/TopTrackList';
 import SpotifyAPIService from '../../backend/services/spotify-api-service';
 import UserTopArtistsContext from '../../backend/data/UserTopArtistsContext';
 import UserTopTracksContext from '../../backend/data/UserTopTracksContext';
 import MostRecentlyPlayedList from '../MostRecentlyPlayedList/MostRecentlyPlayedList';
 import MostRecentlyPlayedContext from '../../backend/data/MostRecentlyPlayedContext';
+import { Option, Select, Typography } from '@mui/joy';
+import TableTrackList from '../common/TableTrackList/TableTrackList';
+import ArtistGrid from '../common/ArtistGrid/ArtistGrid';
 
 function UserTopItemsContainer() {
 
@@ -29,14 +30,21 @@ function UserTopItemsContainer() {
     } = useContext(UserTopTracksContext);
 
     const { updateMostRecentlyPlayed } = useContext (MostRecentlyPlayedContext);
+    
+    const [currentUserTopTracks, setCurrentUserTopTracks] = useState([]);
+    const [currentUserTopArtists, setCurrentUserTopArtists] = useState([]);
 
     useEffect(() => {
         ( async () => {
-            updateUserTopArtistsShortTerm(await SpotifyAPIService.getUserTopArtists("SHORT"));
+            const artistsShortTerm = await SpotifyAPIService.getUserTopArtists("SHORT");
+            setCurrentUserTopArtists(artistsShortTerm);
+            updateUserTopArtistsShortTerm(artistsShortTerm);
             updateUserTopArtistsMediumTerm(await SpotifyAPIService.getUserTopArtists("MEDIUM"));
             updateUserTopArtistsLongTerm(await SpotifyAPIService.getUserTopArtists("LONG"));
 
-            updateUserTopTracksShortTerm(await SpotifyAPIService.getUserTopTracks("SHORT"));
+            const tracksShortTerm = await SpotifyAPIService.getUserTopTracks("SHORT");
+            setCurrentUserTopTracks(tracksShortTerm);
+            updateUserTopTracksShortTerm(tracksShortTerm);
             updateUserTopTracksMediumTerm(await SpotifyAPIService.getUserTopTracks("MEDIUM"));
             updateUserTopTracksLongTerm(await SpotifyAPIService.getUserTopTracks("LONG"));
 
@@ -45,22 +53,76 @@ function UserTopItemsContainer() {
 
     }, []);
 
+
+    const handleSelectTracksOnChange = (event, newValue) => {
+        switch(newValue){
+            case "SHORT":
+                setCurrentUserTopTracks(userTopTracksShortTerm);
+                break;
+            case "MEDIUM":
+                setCurrentUserTopTracks(userTopTracksMediumTerm);
+                break;
+            case "LONG":
+                setCurrentUserTopTracks(userTopTracksLongTerm);
+                break;
+            default: 
+                setCurrentUserTopTracks(userTopTracksShortTerm);;  
+        }
+    };
+
+    const handleSelectArtistsOnChange = (event, newValue) => {
+        switch(newValue){
+            case "SHORT":
+                setCurrentUserTopArtists(userTopArtistsShortTerm);
+                break;
+            case "MEDIUM":
+                setCurrentUserTopArtists(userTopArtistsMediumTerm);
+                break;
+            case "LONG":
+                setCurrentUserTopArtists(userTopArtistsLongTerm);
+                break;
+            default: 
+                setCurrentUserTopArtists(userTopArtistsShortTerm);;  
+        }
+    };
+
     return (
-        <div>
-            <label>Top Artists - Short Term (4 Weeks)</label>
-            <TopArtistList userTopArtists={userTopArtistsShortTerm} />
-            <label>Top Artists - Medium Term (6 Months)</label>
-            <TopArtistList userTopArtists={userTopArtistsMediumTerm} />
-            <label>Top Artists - Long Term (All Time)</label>
-            <TopArtistList userTopArtists={userTopArtistsLongTerm} />
-            <label>Top Tracks - Short Term (4 Weeks)</label>
-            <TopTrackList userTopTracks={userTopTracksShortTerm} />
-            <label>Top Tracks - Medium Term (6 Months)</label>
-            <TopTrackList userTopTracks={userTopTracksMediumTerm} />
-            <label>Top Tracks - Long Term (All Time)</label>
-            <TopTrackList userTopTracks={userTopTracksLongTerm} />
-            <label>Most Recently Played</label>
-            <MostRecentlyPlayedList />
+        <div className='UserTopItemsContainer'>
+            <div id='ArtistHeader'>
+                <Typography level="h3" sx={{ fontWeight: 'bold' }} color="white">Top Artists</Typography>
+                <Select defaultValue="SHORT" color="primary" variant="soft" onChange={handleSelectArtistsOnChange}>
+                    <Option value="SHORT">4 Weeks</Option>
+                    <Option value="MEDIUM">6 Months</Option>
+                    <Option value="LONG">All Time</Option>
+                </Select>
+            </div>
+            <div className="ArtistListContainer">
+                <div className="ArtistList">
+                    <ArtistGrid artistList={currentUserTopArtists} />
+                </div>
+            </div>
+            <div id='TracksHeader'>
+            <Typography level="h3" sx={{ fontWeight: 'bold' }} color="white">Top Tracks</Typography>
+                <Select defaultValue="SHORT" color="primary" variant="soft" onChange={handleSelectTracksOnChange}>
+                    <Option value="SHORT">4 Weeks</Option>
+                    <Option value="MEDIUM">6 Months</Option>
+                    <Option value="LONG">All Time</Option>
+                </Select>
+            </div>
+            <div className="TrackListContainer">
+                <div className="TrackList">
+                    <TableTrackList trackList={currentUserTopTracks}/>
+                </div>
+            </div>
+            <div id="MostRecentlyPlayedHeader">
+                <Typography level="h3" sx={{ fontWeight: 'bold' }} color="white">Most Recently Played</Typography>
+            </div>
+            <div className="TrackListContainer">
+                <div className="TrackList">
+                    <MostRecentlyPlayedList />
+                </div>
+            </div>
+            
         </div>
     );
 }

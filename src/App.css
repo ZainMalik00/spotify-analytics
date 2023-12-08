@@ -1,12 +1,13 @@
 .App {
-  display: block;
-  margin-left: 10px;
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+  /* padding-top: 10px; */
+  justify-content: center;
 }
 
-li{
-  list-style-type: decimal;
-}
-
-label{
-  font-weight: bold;
+.Content {
+  width: 80vw;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

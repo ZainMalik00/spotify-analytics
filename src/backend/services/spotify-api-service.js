@@ -47,6 +47,13 @@ const generateArtistListString = (artists) => {
     return artistsList.join(", ");  
 };
 
+const generateTimeString = (timeInMilliseconds) => {
+    const timeAsDate = new Date(Date.UTC(0,0,0,0,0,0,timeInMilliseconds)),
+    timeAsDateParts = [timeAsDate.getUTCMinutes(), timeAsDate.getUTCSeconds()];
+    return timeAsDateParts.map(s => String(s).padStart(2,'0')).join(':');
+
+}
+
 const createArtistObject = (artistAPIObject) => {
     const artistObject = Artist(
         artistAPIObject.id,
@@ -64,11 +71,12 @@ const createArtistObject = (artistAPIObject) => {
 const createTrackObject = (trackAPIObject) => {
     const albumObject = createAlbumObjectFromTrack(trackAPIObject);
     const artistsAsString = generateArtistListString(trackAPIObject.artists);
+    const durationAsString = generateTimeString(trackAPIObject.duration_ms);
     const previewURL = (!!trackAPIObject.preview_url ? trackAPIObject.preview_url : ""); //Spotify API preview url can be null. This avoids that nightmare
     const trackObject = Track(
         trackAPIObject.id,
         trackAPIObject.name,
-        trackAPIObject.duration_ms,
+        durationAsString,
         artistsAsString,
         trackAPIObject.album.images,
         albumObject,
