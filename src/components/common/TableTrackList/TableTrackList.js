@@ -5,14 +5,23 @@ function TableTrackList (props) {
 
     if(props.trackList.length !== 0){
         return(
-            <Table hoverRow>
+            <Table
+                size="lg" 
+                variant="soft"
+                hoverRow       
+                stickyHeader
+                color= "primary"
+                sx={(theme) => ({
+                    '& th': { color: theme.variants.solid.primary }
+                })}
+            >
                 <thead>
                     <tr>
                         <th style={{ width: '1%' }}>#</th>
                         <th style={{ width: '10%' }}>Image</th>
-                        <th>Title</th>
-                        <th>Artists</th>
-                        <th>Album</th>
+                        <th >Title</th>
+                        <th >Artists</th>
+                        <th >Album</th>
                         <th style={{ width: '7%' }}>Duration</th>
                     </tr>
                 </thead>

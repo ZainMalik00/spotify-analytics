@@ -17,13 +17,11 @@
    margin-bottom: 10px; 
 }
 
-#ArtistsLabel {
-    margin-right: 10px;
-}
-
 .TrackListContainer{
     display: flex;
     justify-content: center;
+    margin-top: 10px; 
+    margin-bottom: 10px; 
 }
 
 #TracksHeader {
@@ -34,15 +32,8 @@
    margin-bottom: 10px;
 }
 
-#TracksLabel {
-    margin-right: 10px;
-}
-
 #MostRecentlyPlayedHeader{
     display: flex;
-}
-
-#MostRecentlyPlayedLabel{
     margin-top: 10px;
     margin-bottom: 10px;
 }

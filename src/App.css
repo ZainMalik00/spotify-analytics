@@ -1,19 +1,13 @@
 .App {
   display: flex;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  /* padding-top: 10px; */
   justify-content: center;
 }
 
 .Content {
   width: 80vw;
-}
-
-li{
-  list-style-type: decimal;
-}
-
-label{
-  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

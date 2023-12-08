@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./ArtistCard.css"
-import { AspectRatio, Card, CardContent, CardCover, CardOverflow, Typography } from '@mui/joy';
+import { Box, Card, CardContent, CardCover, Typography } from '@mui/joy';
 
 function ArtistCard(props){
 
@@ -8,7 +8,16 @@ function ArtistCard(props){
 
     if(!!props.artistItem){
         return(
-            <Card sx={{ width: 160, height: 160, paddingLeft: "0px", paddingRight: "0px", paddingBottom: "0px"}}>
+            <Card
+                variant="solid"
+                sx={{ 
+                    width: 160, 
+                    height: 160, 
+                    paddingLeft: "0px", 
+                    paddingRight: "0px", 
+                    paddingBottom: "0px"
+                }}
+            >
                 <CardCover>
                     <img 
                         src={props.artistItem.images[0].url}
@@ -19,14 +28,22 @@ function ArtistCard(props){
                     />
                 </CardCover>
                 <CardContent sx={{ justifyContent: 'flex-end'}}>
-                    <div 
-                        style={{backgroundColor: "white", opacity:"75%", paddingLeft: "5px", paddingRight: "5px", paddingBottom: "10px"}}
+                    <Box
+                        sx={(theme) => ({
+                            backgroundColor: theme.variants.soft.neutral, 
+                            opacity:"75%", 
+                            paddingLeft: "5px", 
+                            paddingRight: "5px", 
+                            paddingBottom: "10px",
+                            borderBottomLeftRadius: 8,
+                            borderBottomRightRadius: 8,
+                        })}
                         onMouseEnter={() => setIsHidden(false)}
                         onMouseLeave={() => setIsHidden(true)}
                     >
-                        <Typography level="title-md" sx={{textTransform: 'uppercase'}}>{props.index}{". "}{props.artistItem.name}</Typography>
-                        <Typography level="body-sm" sx={{textTransform: 'uppercase'}}>{isHidden? "" : props.artistItem.genres.join(", ")}</Typography>
-                    </div>   
+                        <Typography level="title-md" color="primary" sx={{textTransform: 'uppercase'}}>{props.index}{". "}{props.artistItem.name}</Typography>
+                        <Typography level="body-sm" color="primary" variant="soft" sx={{textTransform: 'uppercase'}}>{isHidden? "" : props.artistItem.genres.join(", ")}</Typography>
+                    </Box>   
                 </CardContent>  
             </Card>
         );

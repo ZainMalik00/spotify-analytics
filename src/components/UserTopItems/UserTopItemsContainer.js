@@ -1,12 +1,11 @@
 import { useEffect, useContext, useState } from 'react';
 import './UserTopItemsContainer.css';
-import TopArtistList from './TopArtistList/TopArtistList';
 import SpotifyAPIService from '../../backend/services/spotify-api-service';
 import UserTopArtistsContext from '../../backend/data/UserTopArtistsContext';
 import UserTopTracksContext from '../../backend/data/UserTopTracksContext';
 import MostRecentlyPlayedList from '../MostRecentlyPlayedList/MostRecentlyPlayedList';
 import MostRecentlyPlayedContext from '../../backend/data/MostRecentlyPlayedContext';
-import { Option, Select } from '@mui/joy';
+import { Option, Select, Typography } from '@mui/joy';
 import TableTrackList from '../common/TableTrackList/TableTrackList';
 import ArtistGrid from '../common/ArtistGrid/ArtistGrid';
 
@@ -90,8 +89,8 @@ function UserTopItemsContainer() {
     return (
         <div className='UserTopItemsContainer'>
             <div id='ArtistHeader'>
-                <label id='ArtistsLabel'>Top Artists</label>
-                <Select defaultValue="SHORT" onChange={handleSelectArtistsOnChange}>
+                <Typography level="h3" sx={{ fontWeight: 'bold' }} color="white">Top Artists</Typography>
+                <Select defaultValue="SHORT" color="primary" variant="soft" onChange={handleSelectArtistsOnChange}>
                     <Option value="SHORT">4 Weeks</Option>
                     <Option value="MEDIUM">6 Months</Option>
                     <Option value="LONG">All Time</Option>
@@ -103,8 +102,8 @@ function UserTopItemsContainer() {
                 </div>
             </div>
             <div id='TracksHeader'>
-                <label id='TracksLabel'>Top Tracks</label>
-                <Select defaultValue="SHORT" onChange={handleSelectTracksOnChange}>
+            <Typography level="h3" sx={{ fontWeight: 'bold' }} color="white">Top Tracks</Typography>
+                <Select defaultValue="SHORT" color="primary" variant="soft" onChange={handleSelectTracksOnChange}>
                     <Option value="SHORT">4 Weeks</Option>
                     <Option value="MEDIUM">6 Months</Option>
                     <Option value="LONG">All Time</Option>
@@ -116,7 +115,7 @@ function UserTopItemsContainer() {
                 </div>
             </div>
             <div id="MostRecentlyPlayedHeader">
-                <label id="MostRecentlyPlayedLabel">Most Recently Played</label>
+                <Typography level="h3" sx={{ fontWeight: 'bold' }} color="white">Most Recently Played</Typography>
             </div>
             <div className="TrackListContainer">
                 <div className="TrackList">
