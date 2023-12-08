@@ -5,3 +5,7 @@ thead tr :last-child {
 tr :last-child {
     text-align: right;
 }
+  
+tr th {
+    height: auto !important;
+}
