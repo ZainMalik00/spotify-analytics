@@ -7,14 +7,11 @@ export function DevServiceProvider({children}) {
     const [isDevMode, setIsDevMode] = useState("false");
 
     const updateIsDevMode = () => {
-        const IsDevModeTemporaryValue = checkIsDevMode().toString();
-        if(IsDevModeTemporaryValue === "true" ){
-            setIsDevMode(IsDevModeTemporaryValue.toString());
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+            setIsDevMode("true");
+        } else {
+            setIsDevMode("false");
         }
-    }
-
-    const checkIsDevMode = () => {
-        return '_self' in React.createElement('div');
     }
 
     return (

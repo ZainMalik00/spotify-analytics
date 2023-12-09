@@ -1,0 +1,6 @@
+.Content {
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+  }
