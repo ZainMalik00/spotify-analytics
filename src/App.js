@@ -1,17 +1,21 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import LoginService from './backend/services/login-service';
 import { UserTopArtistsProvider } from './backend/data/UserTopArtistsContext';
 import { UserTopTracksProvider } from './backend/data/UserTopTracksContext';
 import { MostRecentlyPlayedProvider } from './backend/data/MostRecentlyPlayedContext'
 import UserTopItemsContainer from './components/UserTopItems/UserTopItemsContainer';
 import { Box, Button } from '@mui/joy';
+import DevServiceContext from './backend/services/dev-service';
 
 function App() {
+  const {updateIsDevMode, isDevMode} = useContext(DevServiceContext);
+
   const [spotifyAccessToken, setSpotifyAccessToken] = useState("");
 
   useEffect(() => {
     document.title = 'Spotify Analytics';
+    updateIsDevMode();
     if(window.location.hash) {
       const spotifyAccessParams = LoginService.getParamsAfterLoginRedirect();
       setSpotifyAccessToken(spotifyAccessParams.access_token);
@@ -19,7 +23,11 @@ function App() {
   }, [spotifyAccessToken])
 
   const loginRedirect = () => {
-    LoginService.loginRedirect();
+    if(isDevMode === "true"){
+      LoginService.loginRedirectDev();
+    } else {
+      LoginService.loginRedirectProd();
+    }
   }
 
   if(spotifyAccessToken.length === 0){
@@ -36,7 +44,7 @@ function App() {
       >
         <Box>
           <Button size="lg" onClick={loginRedirect}>Login To Spotify</Button>
-        </Box>   
+        </Box>
       </Box>
     );
   }
