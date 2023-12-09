@@ -23,8 +23,7 @@ function App() {
 
   if(spotifyAccessToken.length === 0){
     return (
-      <Box
-        container 
+      <Box 
         className="App"
         sx={(theme) => ({
           backgroundColor: theme.variants.solid.neutral,
@@ -39,7 +38,6 @@ function App() {
 
   return (
     <Box
-      container 
       className="App"
       sx={(theme) => ({
         backgroundColor: theme.variants.solid.neutral,

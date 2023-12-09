@@ -20,8 +20,7 @@ function LoginPage () {
     }
 
     return(
-        <Box
-            container 
+        <Box 
             className="Content"
             sx={(theme) => ({
                 backgroundColor: theme.variants.solid.neutral,
