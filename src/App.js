@@ -4,10 +4,13 @@ import LoginService from './backend/services/login-service';
 import { UserTopArtistsProvider } from './backend/data/UserTopArtistsContext';
 import { UserTopTracksProvider } from './backend/data/UserTopTracksContext';
 import { MostRecentlyPlayedProvider } from './backend/data/MostRecentlyPlayedContext'
-import UserTopItemsContainer from './components/UserTopItems/UserTopItemsContainer';
-import { Box, Button } from '@mui/joy';
+import { Box } from '@mui/joy';
+import { DevServiceProvider } from './backend/services/dev-service-context';
+import LoginPage from './pages/LoginPage/LoginPage';
+import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
 
 function App() {
+
   const [spotifyAccessToken, setSpotifyAccessToken] = useState("");
 
   useEffect(() => {
@@ -18,47 +21,37 @@ function App() {
     }
   }, [spotifyAccessToken])
 
-  const loginRedirect = () => {
-    LoginService.loginRedirect();
-  }
-
   if(spotifyAccessToken.length === 0){
     return (
-      <Box
-        container 
+      <Box 
         className="App"
         sx={(theme) => ({
           backgroundColor: theme.variants.solid.neutral,
-          height: '100lvh',
-          justifyContent: "center",
-          alignItems: "center"
         })}
       >
-        <Box>
-          <Button size="lg" onClick={loginRedirect}>Login To Spotify</Button>
-        </Box>   
+        <DevServiceProvider>
+          <LoginPage />
+        </DevServiceProvider>
       </Box>
     );
   }
 
   return (
     <Box
-      container 
       className="App"
       sx={(theme) => ({
         backgroundColor: theme.variants.solid.neutral,
       })}
     >
-      <Box className='Content'>
-        <Button onClick={loginRedirect}>Re-login To Spotify</Button>
+      <DevServiceProvider>
         <UserTopArtistsProvider>
           <UserTopTracksProvider>
-            <MostRecentlyPlayedProvider>
-              <UserTopItemsContainer />
-            </MostRecentlyPlayedProvider>
+              <MostRecentlyPlayedProvider>
+                <UserProfilePage />
+              </MostRecentlyPlayedProvider>
           </UserTopTracksProvider>
         </UserTopArtistsProvider>
-      </Box>
+      </DevServiceProvider>
     </Box>
   );
 }
