@@ -53,7 +53,6 @@ function UserTopItemsContainer() {
 
     }, []);
 
-
     const handleSelectTracksOnChange = (event, newValue) => {
         switch(newValue){
             case "SHORT":
@@ -122,7 +121,6 @@ function UserTopItemsContainer() {
                     <MostRecentlyPlayedList />
                 </div>
             </div>
-            
         </div>
     );
 }

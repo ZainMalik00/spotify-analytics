@@ -9,6 +9,7 @@ import { DevServiceProvider } from './backend/services/dev-service-context';
 import LoginPage from './pages/LoginPage/LoginPage';
 import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
 
+
 function App() {
 
   const [spotifyAccessToken, setSpotifyAccessToken] = useState("");
