@@ -10,9 +10,11 @@ function ArtistCard(props){
         return(
             <Card
                 variant="solid"
-                sx={{ 
-                    width: 160, 
-                    height: 160, 
+                sx={{
+                    minWidth: 160, 
+                    width: '100%',
+                    minHeight: 160,
+                    height: "100%", 
                     paddingLeft: "0px", 
                     paddingRight: "0px", 
                     paddingBottom: "0px"

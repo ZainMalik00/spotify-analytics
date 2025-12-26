@@ -3,14 +3,27 @@ import { Artist } from "../entities/Artist";
 import { Track } from "../entities/Track"
 import LoginService from "./login-service";
 
-const accessToken = LoginService.getParamsAfterLoginRedirect().access_token;
+const getAccessToken = () => {
+  // First try to get from storage (authorization code flow)
+  const storedToken = LoginService.getStoredToken();
+  if (storedToken) {
+    return storedToken;
+  }
+  // Fallback to hash (implicit grant flow)
+  const params = LoginService.getParamsAfterLoginRedirect();
+  return params.access_token || "";
+};
+
 const mostRecentlyPlayedEndpoint = 'https://api.spotify.com/v1/me/player/recently-played?limit=50';
 
-const spotifyGETRequest = {
+const getSpotifyGETRequest = () => {
+  const accessToken = getAccessToken();
+  return {
     method: 'GET',
     headers: {
       'Authorization': 'Bearer ' + accessToken
     }
+  };
 };
 
 const getArtistEndpoint = (timeRange) => {
@@ -110,7 +123,7 @@ const createAlbumObjectFromTrack = (trackAPIObject) => {
 const SpotifyAPIService = {
     getUserTopArtists: async function(timeRange){
         let userTopArtists = [];
-        await fetch(getArtistEndpoint(timeRange), spotifyGETRequest)
+        await fetch(getArtistEndpoint(timeRange), getSpotifyGETRequest())
             .then(response => response.json())
             .then((responseJSON) => { 
                 responseJSON.items.forEach(artistItem => {
@@ -123,7 +136,7 @@ const SpotifyAPIService = {
 
     getUserTopTracks: async function(timeRange){
         let userTopTracks = [];
-        await fetch(getTrackEndpoint(timeRange), spotifyGETRequest)
+        await fetch(getTrackEndpoint(timeRange), getSpotifyGETRequest())
             .then(response => response.json())
             .then((responseJSON) => { 
                 responseJSON.items.forEach(trackItem => {
@@ -136,7 +149,7 @@ const SpotifyAPIService = {
 
     getUserMostRecentPlayed: async function(){
         let userMostRecentlyPlayed = [];
-        await fetch(mostRecentlyPlayedEndpoint, spotifyGETRequest)
+        await fetch(mostRecentlyPlayedEndpoint, getSpotifyGETRequest())
             .then(response => response.json())
             .then((responseJSON) => { 
                 responseJSON.items.forEach((RecentlyPlayedItem) => {

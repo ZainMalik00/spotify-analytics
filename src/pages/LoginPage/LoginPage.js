@@ -1,4 +1,4 @@
-import './LoginPage.css';
+import styles from './LoginPage.module.css';
 import { useEffect, useContext } from 'react';
 import LoginService from '../../backend/services/login-service';
 import { Box, Button } from '@mui/joy';
@@ -21,10 +21,10 @@ function LoginPage () {
 
     return(
         <Box 
-            className="Content"
+            className={styles.Content}
             sx={(theme) => ({
                 backgroundColor: theme.variants.solid.neutral,
-                height: '100lvh',
+                height: '100svh',
                 justifyContent: "center",
                 alignItems: "center"
             })}
