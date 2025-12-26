@@ -1,4 +1,4 @@
-import './UserProfilePage.css';
+import styles from './UserProfilePage.module.css';
 import { useEffect, useContext } from 'react';
 import LoginService from '../../backend/services/login-service';
 import { Box, Button } from '@mui/joy';
@@ -21,7 +21,7 @@ function UserProfilePage () {
     }
 
     return(
-        <Box className='Content'>
+        <Box className={styles.Content}>
             <Button onClick={loginRedirect}>Re-login To Spotify</Button>
             <UserTopItemsContainer />
         </Box>

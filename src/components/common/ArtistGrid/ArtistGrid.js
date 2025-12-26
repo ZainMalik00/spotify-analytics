@@ -18,7 +18,7 @@ function ArtistGrid (props) {
                         <Grid 
                             key={index}
                             sx={{ 
-                                m: 2,
+                                m: { xs: 1, sm: 2 },
                                 flexGrow: 1 
                             }}
                         >

@@ -3,4 +3,5 @@
     padding-left: 10px;
     padding-right: 10px;
     justify-content: center;
+    flex-direction: column;
   }
