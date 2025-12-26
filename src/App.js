@@ -8,6 +8,7 @@ import { Box } from '@mui/joy';
 import { DevServiceProvider } from './backend/services/dev-service-context';
 import LoginPage from './pages/LoginPage/LoginPage';
 import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
+import NavBar from './components/NavBar/NavBar';
 
 
 function App() {
@@ -77,7 +78,8 @@ function App() {
         <UserTopArtistsProvider>
           <UserTopTracksProvider>
               <MostRecentlyPlayedProvider>
-                <UserProfilePage />
+                <NavBar />
+                <UserProfilePage className="Content" />
               </MostRecentlyPlayedProvider>
           </UserTopTracksProvider>
         </UserTopArtistsProvider>

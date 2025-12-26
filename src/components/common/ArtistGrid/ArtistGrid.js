@@ -19,7 +19,8 @@ function ArtistGrid (props) {
                             key={index}
                             sx={{ 
                                 m: { xs: 1, sm: 2 },
-                                flexGrow: 1 
+                                flexGrow: 1 ,
+                                height: "100%",
                             }}
                         >
                             <ArtistCard index={index+1} artistItem={artist} />

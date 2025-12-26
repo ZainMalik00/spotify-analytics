@@ -14,7 +14,8 @@
    align-items: center;
    justify-content: space-between;
    margin-top: 10px; 
-   margin-bottom: 10px; 
+   margin-bottom: 10px;
+   scroll-margin-top: 74px; 
 }
 
 .TrackListContainer{
@@ -30,10 +31,12 @@
    justify-content: space-between; 
    margin-top: 10px; 
    margin-bottom: 10px;
+   scroll-margin-top: 74px; 
 }
 
 #MostRecentlyPlayedHeader{
     display: flex;
     margin-top: 10px;
     margin-bottom: 10px;
+    scroll-margin-top: 74px; 
 }
